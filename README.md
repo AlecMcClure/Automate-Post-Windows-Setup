@@ -2,7 +2,6 @@
 To follow along with the steps below open the **template_WinSetup.ps1** script in either the Powershell ISE or Visual Studio Code(recommended). 
 
 This script was written in VScode and may best be viewed using VScode.
-
 <br/>
 
 # Post Windows Setup Script

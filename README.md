@@ -1,4 +1,10 @@
-# Automate-Post-Windows-Setup
+# Automate Post Windows Setup
+To follow along with the steps below open the **template_WinSetup.ps1** script in either the Powershell ISE or Visual Studio Code(recommended). 
+
+This script was written in VScode and may best be viewed using VScode.
+
+<br/>
+
 # Post Windows Setup Script
 
 This script is a template that is designed to help automate tasks that are typically performed on a new Windows installation/image.
@@ -153,7 +159,7 @@ Change `PATH TO FOLDER` on **Line 608** to the folder path of where the installe
         
 **It is Highly recommended to consolidate all the installers you are going to useinto a central location.**
 
-***See ApplicationInstallers.docx for examples***
+***See [ApplicationInstallers.docx](https://github.com/AlecMcClure/Automate-Post-Windows-Setup/blob/main/ApplicationInstallers.docx) for examples***
 
 <br/>
 

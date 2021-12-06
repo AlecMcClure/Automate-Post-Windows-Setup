@@ -50,48 +50,47 @@ For Example:
 
 <br/>
 
-### **2. Get Domain**
+### **2. Set Computer Naming Scheme**
+On **Line 61** Change `$NamingScheme1 = "NAMING SCHEME"` to your Computer Naming Scheme.
 
-Inside the `join-domain` function on **Line 183**  change `$Domain = "YOUR DOMAIN"` to your Fully Qualified Domain Name.
+For example:
+
+> A computer with the name: CHWD10-TESTLT \
+    Would look like this: `$NamingScheme1 = "CHWD*"`
+
+<br/>
+
+If you have multiple locations uncomment the other `$NamingScheme` variables to specify your
+other names
+
+For example:
+> A computer in New York with the name: NYWD10-TESTLT \
+Would look like this: `$NamingScheme2 = "NYWD*"`
+
+<br/>
+
+
+### **3. Get Domain**
+Inside the `join-domain` function on **Line 201**  change `$Domain = "YOUR DOMAIN"` to your Fully Qualified Domain Name.
 
 For Example:
 >  `$Domain = "example.contoso.com"`
 
 <br/>
 
-### **3. Set Computer Naming Scheme For Joining Domain**
-
-On **Line 199** Change `if ($script:name -like "NAMING SCHEME")` to your Computer Naming Scheme.
-
-For example:
-
-> A computer with the name: CHWD10-TESTLT \
-    Would look like this: `if ($script:name -like "CHWD*")`
-
-<br/>
-
-If you have multiple locations Uncomment the elseif statements to specify your
-other names 
-
-For example:
-> A computer in New York with the name: NYWD10-TESTLT \
-Would look like this: `elseif ($script:name -like "NYWD*")`
-
-<br/>
-
 ### **4. Get Domain Controller/s**
-Next on **Line 202** change `$Server = "DOMAIN CONTROLLER"` to name of your locations Domain Controller.
+Next on **Line 206** change `$Server = "DOMAIN CONTROLLER"` to the name of your locations Domain Controller.
 
 For Example:
 
 > `$Server = MYDC01`
 
-Do the same for any elseif statements you used for your other Computer Name Schemes
+Uncomment (remove the `<# #>`) and do the same for any elseif statements you use for your other Computer Name Schemes
 
 <br/>
 
 ### **5. Get OU Computer Path/s**
-On **Line 217** replace the `OU COMPUTER PATH` with the OU Path for your computer accounts in Active Directory.
+On **Line 221** replace the `OU COMPUTER PATH` with the OU Path for your computer accounts in Active Directory.
 
 For Example if your domain is `'example.contoso.com'` and your computer OU is under another OU called Seattle 
 
@@ -103,23 +102,11 @@ Do the same for any elseif statements you used for your other Computer Name Sche
 
 <br/>
 
-### **6. Set Computer Naming Scheme For Finding IP Address**
 
-On **Line 317** replace `'NAMING SCHEME'` with your Computer Naming Scheme. 
+### **6. Set The Starting IP Address**
+On **Line 331** replace `$IP = "xxx.xxx.xxx.$n"`with your networks IP settings making sure to leave the `$n` at the end.
 
-**Like in Step 3**
-
-Do the same for any elseif statements you use.
-
-<br/>
-
-### **7. Set The Starting IP Address**
-On **Line 327** replace `$IP = "xxx.xxx.xxx.$n"`with your networks IP settings.
-
-
-If you have different IP Address for different office locations use the commented out elseif statements.
-
-**Like in Step 3**
+If you have different IP Address for different office locations and different Computer Naming Scheme's Uncomment (remove the `<# #>`) the elseif statements starting on **Line 333**.
 
 For Example:
 
@@ -130,28 +117,26 @@ For Example:
 
 <br/>
 
-### **8. Set the Starting Octet [Optional]**
+### **7. Set the Starting Octet [Optional]**
 Currently if you choose to use the Auto Search for Free IP option it starts at xxx.xxx.xxx.110 
 <br/>
 
-If you wish to change this then update the numbers for `$v = 111 ` on **Line 356** and `$out = IPtest(110)` on **Line 441** to where you want to start the search from. 
+If you wish to change this then update the numbers for `$v = 111 ` on **Line 360** and `$out = IPtest(110)` on **Line 445** to where you want to start the search from. 
 
 Note that `$v = 111` is 1 higher than `$out = IPtest(110)` make sure you update it accordingly for your starting number.
 
 <br/>
 
-### **9. Setup The Auto IP Search Function**
+### **8. Setup The Auto IP Search Function**
 On **Line 505** change `$MaskBits = 23` to reflect what subnet mask you are using on your network
 
-**Like in Step 3** we will be using more if/elseif statements using the Computer Naming Scheme. On **Line 507** update `"NAMING SCHEME"` to your Computer Naming Scheme.
-
-On **Lines 507 - 510** update the variables to reflect your networks Default Gateway and DNS Servers.
+On **Lines 508 - 510** update the variables to reflect your networks Default Gateway and DNS Servers.
 
 Do the same for any elseif statements you use.
 
 <br/>
 
-### **10. Update Application Menu and Get Application Installers**
+### **9. Update Application Menu and Get Application Installers**
 On **Line 573** update the menu that lists the applications you wish to install.
 
 Change `PATH TO FOLDER` on **Line 608** to the folder path of where the installers are located.
@@ -162,7 +147,7 @@ Change `PATH TO FOLDER` on **Line 608** to the folder path of where the installe
 
 <br/>
 
-### **11. Application Installer Functions**
+### **10. Application Installer Functions**
 Use the following as a template to create Application Installer Functions
 
 If using MSI file: <br/>
@@ -179,14 +164,14 @@ If using EXE file:
 
 <br/>
 
-### **12. Update `Install-All` Function**
-On **Line 680** Update/Change the Commented Application Installer Functions to any functions you created in **Step 11**
+### **11. Update `Install-All` Function**
+On **Line 680** Update/Change the Commented Application Installer Functions to any functions you created in **Step 10**
 
 Notice there is a 5 second delay between Installs, this is to ensure the previous installer has finished.
 
 <br/>
 
-### **13. Update Application Menu**
+### **12. Update Application Menu**
 On **Line 704** use the code as a template for updating/creating your Application Menu 
 
 <br/>

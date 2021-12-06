@@ -48,6 +48,21 @@ $script:name = Read-Host -prompt "`nEnter New Computer Name "
 $Script:IPCheckBool = $false
 $script:MenuExit = 0
 
+#Set the Naming Scheme for your Computers
+<#
+    Change NAMING SCHEME to your Computer Naming Scheme for example:
+    A computer with the name CHWD10-TESTLT for a Chicago Laptop running Windows 10
+    Would look like this: "CHWD*"
+    If you have multiple locations uncomment the other $NamingScheme variables to specify your
+    other names for example:
+    A computer in Peoria with the name PEWD10-TESTLT
+    Would look like this: "PEWD*"
+#>
+$NamingScheme1 = "NAMING SCHEME"
+#$NamingScheme2 = "NAMING SCHEME"
+#$NamingScheme3 = "NAMING SCHEME"
+#$NamingScheme4 = "NAMING SCHEME"
+
 #Local Installer Path 
 $windeployapps = "C:\WinDeployApps"
 
@@ -185,18 +200,7 @@ function join-domain {
     #For Example: example.contoso.com
     $Domain = "YOUR DOMAIN"
 
-    <#
-    Change NAMING SCHEME to your Computer Naming Scheme for example:
-    A computer with the name CHWD10-TESTLT for a Chicago Laptop running Windows 10
-    Would look like this: "CHWD*"
-
-    If you have multiple locations use the commented out elseif statements to specify your
-    other names for example:
-    A computer in Peoria with the name PEWD10-TESTLT
-    Would look like this: "PEWD*"
-    #>
-
-    if ($script:name -like "NAMING SCHEME") {
+    if ($script:name -like $NamingScheme1) {
         #Replace DOMAIN CONTROLLER with the Server name of your Domain Controller
         #for example: MYDC01 
         $Server = "DOMAIN CONTROLLER"
@@ -216,8 +220,12 @@ function join-domain {
         #>
         Add-Computer -DomainName $Domain -DomainCredential $Credential -Server $Server -OUPath 'OU COMPUTER PATH' -NewName $script:name -Verbose
     }
+    
     <#
-    elseif ($script:name -like "NAMING SCHEME") {
+        If you have multiple locations uncomment the below elseif statements and adjust their OU COMPUTER PATH
+    #>
+    <#
+    elseif ($script:name -like $NamingScheme2) {
         
         $Server = "OTHERDC"
 
@@ -228,7 +236,7 @@ function join-domain {
         Add-Computer -DomainName $Domain -DomainCredential $Credential -Server $Server -OUPath 'OU COMPUTER PATH' -NewName $script:name -Verbose
     }
 
-    elseif ($script:name -like "NAMING SCHEME") {
+    elseif ($script:name -like $NamingScheme3) {
         
         $Server = "OTHERDC"
         
@@ -239,7 +247,7 @@ function join-domain {
         Add-Computer -DomainName $Domain -DomainCredential $Credential -Server $Server -OUPath 'OU COMPUTER PATH' -NewName $script:name -Verbose
     }
 
-    elseif ($script:name -like "NAMING SCHEME") {
+    elseif ($script:name -like $NamingScheme4) {
         
         $Server = "OTHERDC"
         
@@ -251,7 +259,7 @@ function join-domain {
     }
     #>
     else {
-        Write-Host "Your Computer Name Did Not Match our Naming Scheme.`n`nPlease try again!" -ForegroundColor Red
+        Write-Host "Your computer came did not match our Naming Scheme.`n`nPlease try again!" -ForegroundColor Red
         Exit
     }
     
@@ -306,18 +314,14 @@ function test-IPaddress ($testIP) {
 #Run the IP Test on an Auto Generated IP Address
 
 function IPtest($inIP) {    
-    <#
-        Replace NAMING SCHEME with your computer naming scheme like above when you
-        changed it for the domain function.
-        i.e. "CHWD*"
-    #>
+
     Clear-Host
     $n = $inIP
     do {
-        if ($script:name -like "NAMING SCHEME") {
+        if ($script:name -like $NamingScheme1) {
             <#
                 Replace the IP Address below with your networks IP settings.
-                If you have different IP Address for different office locations
+                If you have different IP Address' for different office locations
                 use the commented out elseif statements like before in the join domain function.
 
                 Example:
@@ -327,13 +331,13 @@ function IPtest($inIP) {
             $IP = "xxx.xxx.xxx.$n"
         }
         <#
-        elseif ($script:name -like "NAMING SCHEME") {
+        elseif ($script:name -like $NamingScheme2) {
             $IP = "xxx.xxx.xxx.$n"    
         }
-        elseif ($script:name -like "NAMING SCHEME") {
+        elseif ($script:name -like $NamingScheme3) {
             $IP = "xxx.xxx.xxx.$n"    
         }
-        elseif ($script:name -like "NAMING SCHEME") {
+        elseif ($script:name -like $NamingScheme4) {
             $IP = "xxx.xxx.xxx.$n"
         }
         test-IPaddress($IP)
@@ -494,38 +498,34 @@ function set-newip($InputIP) {
     $IP = $InputIP
     
     <#
-        Replace NAMING SCHEME with your computer naming scheme like above when you
-        changed it for the domain function.
-        i.e. "CHWD*"
-
         Change the values for $Gateway , $Dns1 , $Dns2 and $MaskBits to reflect your network
     #>
 
         #$MaskBits = 24 # This means subnet mask = 255.255.255.0
         $MaskBits = 23 # This means subnet mask = 255.255.254.0
 
-    if ($script:name -like "NAMING SCHEME") {
+    if ($script:name -like $NamingScheme1) {
         $Gateway = "DEFAULT GATEWAY"
         $Dns1 = "PRIMARY DNS SERVER IP"
         $Dns2 = "ALTERNATE DNS SERVER IP"
         $Dns = $Dns1 , $Dns2
     }
     <#
-    elseif ($script:name -like "NAMING SCHEME") {
+    elseif ($script:name -like $NamingScheme2) {
         $Gateway = "DEFAULT GATEWAY"
         $Dns1 = "PRIMARY DNS SERVER IP"
         $Dns2 = "ALTERNATE DNS SERVER IP"
         $Dns = $Dns1 , $Dns2
     }
 
-    elseif ($script:name -like "NAMING SCHEME") {
+    elseif ($script:name -like $NamingScheme3) {
         $Gateway = "DEFAULT GATEWAY"
         $Dns1 = "PRIMARY DNS SERVER IP"
         $Dns2 = "ALTERNATE DNS SERVER IP"
         $Dns = $Dns1 , $Dns2
     }
 
-    elseif ($script:name -like "NAMING SCHEME") {
+    elseif ($script:name -like $NamingScheme4) {
         $Gateway = "DEFAULT GATEWAY"
         $Dns1 = "PRIMARY DNS SERVER IP"
         $Dns2 = "ALTERNATE DNS SERVER IP"

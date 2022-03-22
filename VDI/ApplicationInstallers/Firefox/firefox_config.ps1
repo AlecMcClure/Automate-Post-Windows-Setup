@@ -1,0 +1,2 @@
+New-Item -Path "C:\Program Files\Mozilla Firefox" -ItemType Directory -Name "distribution"
+#Add-Content $env:APPDATA\Mozilla\Firefox\Profiles\"*.default-release"\prefs.js -Value 'user_pref("security.enterprise_roots.enabled", true);'
